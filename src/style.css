@@ -282,17 +282,18 @@ body {
 }
 
 .ai-answer-card .answer-content h1, .ai-answer-card .answer-content h2, .ai-answer-card .answer-content h3 {
-  margin: 16px 0 6px;
+  margin: 20px 0 8px;
   padding: 0;
   line-height: 1.3;
 }
+.ai-answer-card .answer-content h1:first-child { margin-top: 0; }
 .ai-answer-card .answer-content h1 { font-size: 20px; }
 .ai-answer-card .answer-content h2 { font-size: 17px; }
 .ai-answer-card .answer-content h3 { font-size: 15px; }
 
-.ai-answer-card .answer-content p { margin: 6px 0; }
-.ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 6px 0; padding-left: 24px; }
-.ai-answer-card .answer-content li { margin: 3px 0; }
+.ai-answer-card .answer-content p { margin: 8px 0; }
+.ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 8px 0; padding-left: 24px; }
+.ai-answer-card .answer-content li { margin: 4px 0; }
 .ai-answer-card .answer-content li:first-child { margin-top: 0; }
 .ai-answer-card .answer-content li:last-child { margin-bottom: 0; }
 .ai-answer-card .answer-content code {
