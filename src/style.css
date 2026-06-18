@@ -288,9 +288,9 @@ body {
   font-weight: 700;
 }
 .ai-answer-card .answer-content h1:first-child { margin-top: 0; }
-.ai-answer-card .answer-content h1 { font-size: 22px; }
+.ai-answer-card .answer-content h1 { font-size: 20px; }
 .ai-answer-card .answer-content h2 { font-size: 18px; }
-.ai-answer-card .answer-content h3 { font-size: 15px; font-weight: 600; }
+.ai-answer-card .answer-content h3 { font-size: 16px; font-weight: 600; }
 
 .ai-answer-card .answer-content p { margin: 8px 0; font-size: 14px; }
 .ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 8px 0; padding-left: 24px; }
