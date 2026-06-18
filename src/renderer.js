@@ -264,7 +264,7 @@ const BrowserApp = {
   // Tabs
   createTab(url) {
     const tabId = 'tab-' + (++this.tabCounter);
-    const tab = { id: tabId, title: 'New Tab', url: url || '', viewReady: false, element: null, webview: null, showingAI: false };
+    const tab = { id: tabId, title: 'New Tab', url: url || '', viewReady: false, element: null, webview: null, showingAI: false, aiQuery: '', aiBodyHTML: '', aiConversation: [] };
     this.tabs.set(tabId, tab);
     TabManager.createTabElement(tab);
     this.activateTab(tabId);
@@ -278,7 +278,13 @@ const BrowserApp = {
       if (prev) {
         prev.element.classList.remove('active');
         if (prev.webview) prev.webview.classList.add('hidden');
-        prev.showingAI = !document.getElementById('ai-results-page').classList.contains('hidden');
+        const aiPage = document.getElementById('ai-results-page');
+        prev.showingAI = !aiPage.classList.contains('hidden');
+        if (prev.showingAI) {
+          prev.aiQuery = document.getElementById('ai-query-display').textContent;
+          prev.aiBodyHTML = document.getElementById('ai-results-body').innerHTML;
+          prev.aiConversation = AIResultsPage.conversation ? [...AIResultsPage.conversation] : [];
+        }
       }
     }
     this.currentTabId = tabId;
@@ -287,18 +293,28 @@ const BrowserApp = {
     if (tab.viewReady && tab.webview) {
       tab.webview.classList.remove('hidden');
       if (tab.showingAI) {
-        this.showAIResults();
+        this.restoreAIResults(tab);
       } else {
         this.showWebview();
       }
     } else if (tab.showingAI) {
-      this.showAIResults();
+      this.restoreAIResults(tab);
     } else {
       this.showEmptyState();
       this.hideAIResults();
     }
     this.updateNavState();
     this.updateBookmarkButton();
+  },
+
+  restoreAIResults(tab) {
+    document.getElementById('ai-results-page').classList.remove('hidden');
+    document.getElementById('empty-state').style.display = 'none';
+    document.getElementById('webview-container').style.display = 'none';
+    document.getElementById('ai-query-display').textContent = tab.aiQuery || '';
+    document.getElementById('ai-results-body').innerHTML = tab.aiBodyHTML || '';
+    AIResultsPage.conversation = tab.aiConversation ? [...tab.aiConversation] : [];
+    document.title = (tab.aiQuery || tab.title || 'New Tab') + ' - MyAi Browser';
   },
 
   closeTab(tabId) {
@@ -346,6 +362,8 @@ const BrowserApp = {
     document.getElementById('empty-state').style.display = 'none';
     document.querySelectorAll('.full-page').forEach(el => el.classList.add('hidden'));
     document.getElementById('webview-container').style.display = '';
+    const tab = this.getCurrentTab();
+    if (tab) document.title = (tab.title || 'New Tab') + ' - MyAi Browser';
   },
   hideEmptyState() { document.getElementById('empty-state').style.display = 'none'; },
   showEmptyState() {
@@ -353,6 +371,7 @@ const BrowserApp = {
     document.getElementById('ai-results-page').classList.add('hidden');
     document.querySelectorAll('.full-page').forEach(el => el.classList.add('hidden'));
     document.getElementById('webview-container').style.display = 'none';
+    document.title = 'New Tab - MyAi Browser';
     const input = document.getElementById('empty-search-input');
     if (input) { input.value = ''; input.focus(); }
   },
@@ -361,7 +380,12 @@ const BrowserApp = {
     document.getElementById('empty-state').style.display = 'none';
     document.getElementById('webview-container').style.display = 'none';
     const tab = this.getCurrentTab();
-    if (tab) tab.showingAI = true;
+    if (tab) {
+      tab.showingAI = true;
+      tab.aiQuery = document.getElementById('ai-query-display').textContent;
+      tab.aiBodyHTML = document.getElementById('ai-results-body').innerHTML;
+      tab.aiConversation = AIResultsPage.conversation ? [...AIResultsPage.conversation] : [];
+    }
   },
   hideAIResults() {
     document.getElementById('ai-results-page').classList.add('hidden');

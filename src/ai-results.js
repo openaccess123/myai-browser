@@ -15,6 +15,12 @@ const AIResultsPage = {
       '<div class="ai-loading"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
     document.getElementById('ai-followup-input').value = '';
     this.conversation = [];
+    const tab = BrowserApp.getCurrentTab();
+    if (tab) {
+      tab.title = query;
+      tab.element.querySelector('.tab-title').textContent = query;
+      document.title = query + ' - MyAi Browser';
+    }
   },
 
   async answer(query) {

@@ -65,6 +65,9 @@ const TabManager = {
     wv.addEventListener('page-title-updated', (e) => {
       tab.title = e.title;
       tab.element.querySelector('.tab-title').textContent = e.title;
+      if (tab.id === BrowserApp.currentTabId) {
+        document.title = e.title + ' - MyAi Browser';
+      }
     });
     wv.addEventListener('page-favicon-updated', (e) => {
       if (e.favicons && e.favicons.length > 0) {
