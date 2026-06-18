@@ -294,6 +294,7 @@ body {
 
 .ai-answer-card .answer-content p { margin: 8px 0; font-size: 14px; }
 .ai-answer-card .answer-content p:first-child { font-size: 20px; font-weight: 700; margin: 0 0 8px; }
+.ai-answer-card .answer-content p:has(> strong:only-child) { font-size: 18px; font-weight: 700; margin: 16px 0 6px; }
 .ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 8px 0; padding-left: 24px; }
 .ai-answer-card .answer-content li { margin: 4px 0; font-size: 14px; }
 .ai-answer-card .answer-content code {
