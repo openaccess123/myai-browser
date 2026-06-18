@@ -9,7 +9,7 @@ const AI_CONFIG = {
       type: 'openai',
       apiKey: 'YOUR_GROQ_API_KEY',
       apiUrl: 'https://api.groq.com/openai/v1/chat/completions',
-      model: 'llama-4-scout-17b'
+      model: 'meta-llama/llama-4-scout-17b-16e-instruct'
     },
     {
       name: 'Gemini 2.0 Flash',
