@@ -284,7 +284,7 @@ const BrowserApp = {
     this.currentTabId = tabId;
     const tab = this.tabs.get(tabId);
     tab.element.classList.add('active');
-    this.positionPlusButton(tab);
+    this.positionPlusButton();
     if (tab.viewReady && tab.webview) {
       tab.webview.classList.remove('hidden');
       if (tab.showingAI) {
@@ -302,10 +302,11 @@ const BrowserApp = {
     this.updateBookmarkButton();
   },
 
-  positionPlusButton(tab) {
+  positionPlusButton() {
     const plusBtn = document.getElementById('new-tab-btn');
-    if (tab && tab.element) {
-      tab.element.parentNode.insertBefore(plusBtn, tab.element.nextSibling);
+    const tabBar = document.getElementById('tab-bar');
+    if (tabBar && plusBtn) {
+      tabBar.appendChild(plusBtn);
     }
   },
 
