@@ -292,7 +292,7 @@ body {
 .ai-answer-card .answer-content h2 { font-size: 18px; }
 .ai-answer-card .answer-content h3 { font-size: 16px; font-weight: 600; }
 
-.ai-answer-card .answer-content p { margin: 8px 0; font-size: 14px; }
+.ai-answer-card .answer-content p { margin: 8px 0 10px; font-size: 14px; }
 .ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 8px 0; padding-left: 24px; }
 .ai-answer-card .answer-content li { margin: 4px 0; font-size: 14px; }
 .ai-answer-card .answer-content code {
