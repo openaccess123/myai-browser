@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src *; img-src * data:; font-src 'self' data:;">
+  <title>MyAi Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="tab-bar">
+    <div id="tabs-container"></div>
+    <div id="window-controls">
+      <button class="window-btn" id="minimize-btn">─</button>
+      <button class="window-btn" id="maximize-btn">□</button>
+      <button class="window-btn" id="close-btn">✕</button>
+    </div>
+  </div>
+
+  <div id="nav-bar">
+    <button id="back-btn">◀</button>
+    <button id="forward-btn">▶</button>
+    <button id="refresh-btn">⟳</button>
+    <div id="url-bar-container">
+      <div id="url-bar-left">
+        <span id="secure-icon">🔒</span>
+      </div>
+      <input type="text" id="url-bar" placeholder="Search with AI or enter URL..." spellcheck="false" autofocus>
+      <div id="url-bar-right">
+        <button id="bookmark-btn">☆</button>
+      </div>
+    </div>
+    <button id="history-btn" title="History (Ctrl+H)">🕐</button>
+    <button id="bookmarks-btn" title="Bookmarks (Ctrl+Shift+O)">★</button>
+    <button id="settings-btn">⚙</button>
+  </div>
+
+  <div id="content-area">
+    <div id="webview-container"></div>
+
+    <div id="ai-results-page" class="hidden">
+      <div id="ai-results-header">
+        <div id="ai-query-display"></div>
+        <div id="ai-source-badge">AI</div>
+      </div>
+      <div id="ai-results-body-wrapper">
+        <div id="ai-ad-left"></div>
+        <div id="ai-results-body"></div>
+        <div id="ai-ad-right"></div>
+      </div>
+      <div id="ai-results-footer">
+        <div id="ai-followup-wrapper">
+          <input type="text" id="ai-followup-input" placeholder="Ask a follow-up question..." spellcheck="false">
+          <button id="ai-followup-btn">Ask</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="history-page" class="full-page hidden">
+      <div class="fp-header">
+        <button class="fp-back-btn" onclick="BrowserApp.closeFullPage()">◀ Back</button>
+        <h2>History</h2>
+        <button id="clear-history-btn" class="fp-action-btn">Clear All</button>
+      </div>
+      <div class="fp-search-bar">
+        <input type="text" id="history-search" class="fp-search" placeholder="Search history..." spellcheck="false">
+      </div>
+      <div class="fp-body" id="history-list"></div>
+    </div>
+
+    <div id="bookmarks-page" class="full-page hidden">
+      <div class="fp-header">
+        <button class="fp-back-btn" onclick="BrowserApp.closeFullPage()">◀ Back</button>
+        <h2>Bookmarks</h2>
+        <div></div>
+      </div>
+      <div class="fp-search-bar">
+        <input type="text" id="bookmarks-search" class="fp-search" placeholder="Search bookmarks..." spellcheck="false">
+      </div>
+      <div class="fp-body" id="bookmarks-list"></div>
+    </div>
+
+    <div id="empty-state">
+      <div id="empty-state-content">
+        <div id="empty-logo">MyAi Browser</div>
+        <p>Ask anything or enter a URL to browse</p>
+        <div id="empty-search-bar">
+          <span id="empty-search-icon">🔍</span>
+          <input type="text" id="empty-search-input" placeholder="Search the web or ask AI..." spellcheck="false" autofocus>
+          <button id="empty-search-btn">Search</button>
+        </div>
+        <div id="empty-suggestions">
+          <button class="suggestion" data-query="What is artificial intelligence?">What is AI?</button>
+          <button class="suggestion" data-query="Explain quantum computing in simple terms">Quantum computing</button>
+          <button class="suggestion" data-query="Best ways to learn programming in 2026">Learn programming</button>
+          <button class="suggestion" data-query="Latest developments in renewable energy">Renewable energy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="hidden">
+    <div id="settings-overlay"></div>
+    <div id="settings-panel">
+      <div id="settings-header">
+        <h2>Settings</h2>
+        <button id="settings-close-btn">✕</button>
+      </div>
+      <div id="settings-body">
+        <div class="settings-section">
+          <h3>Appearance</h3>
+          <label>Theme</label>
+          <select id="theme-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+      </div>
+      <div id="settings-footer">
+        <button id="settings-save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="renderer.js"></script>
+  <script src="tab-manager.js"></script>
+  <script src="search-bar.js"></script>
+  <script src="ai-results.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

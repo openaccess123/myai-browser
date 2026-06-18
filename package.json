@@ -1,0 +1,46 @@
+{
+  "name": "myai-browser",
+  "version": "1.0.0",
+  "description": "AI Browser powered by DeepSeek",
+  "main": "main.js",
+  "author": "NF360",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:signed": "set CSC_LINK=nf360.pfx && set CSC_KEY_PASSWORD=nf360 && electron-builder"
+  },
+  "build": {
+    "appId": "com.nf360.myai-browser",
+    "productName": "MyAi Browser",
+    "files": [
+      "main.js",
+      "preload.js",
+      "config.js",
+      "src/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "nf360",
+      "repo": "myai-browser"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9",
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.35.1"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.15.3"
+  }
+}
