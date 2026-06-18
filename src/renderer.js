@@ -284,7 +284,6 @@ const BrowserApp = {
     this.currentTabId = tabId;
     const tab = this.tabs.get(tabId);
     tab.element.classList.add('active');
-    this.positionPlusButton();
     if (tab.viewReady && tab.webview) {
       tab.webview.classList.remove('hidden');
       if (tab.showingAI) {
@@ -300,15 +299,6 @@ const BrowserApp = {
     }
     this.updateNavState();
     this.updateBookmarkButton();
-  },
-
-  positionPlusButton() {
-    const plusBtn = document.getElementById('new-tab-btn');
-    const tabBar = document.getElementById('tab-bar');
-    const activeTab = tabBar.querySelector('.tab.active');
-    if (activeTab && activeTab.nextSibling !== plusBtn) {
-      tabBar.insertBefore(plusBtn, activeTab.nextSibling);
-    }
   },
 
   closeTab(tabId) {

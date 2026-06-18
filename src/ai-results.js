@@ -163,6 +163,7 @@ const AIResultsPage = {
       }
       return `<p>${m}</p>`;
     });
+    html = html.replace(/\n\s*\n/g, '\n');
     return html;
   },
 

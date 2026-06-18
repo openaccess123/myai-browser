@@ -276,7 +276,7 @@ body {
 .ai-answer-card .answer-content {
   font-size: 15px;
   line-height: 1.7;
-  white-space: pre-line;
+  white-space: normal;
   word-wrap: break-word;
   color: var(--text-primary);
 }
