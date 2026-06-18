@@ -264,7 +264,7 @@ const BrowserApp = {
   // Tabs
   createTab(url) {
     const tabId = 'tab-' + (++this.tabCounter);
-    const tab = { id: tabId, title: 'New Tab', url: url || '', viewReady: false, element: null, webview: null };
+    const tab = { id: tabId, title: 'New Tab', url: url || '', viewReady: false, element: null, webview: null, showingAI: false };
     this.tabs.set(tabId, tab);
     TabManager.createTabElement(tab);
     this.activateTab(tabId);
@@ -278,6 +278,7 @@ const BrowserApp = {
       if (prev) {
         prev.element.classList.remove('active');
         if (prev.webview) prev.webview.classList.add('hidden');
+        prev.showingAI = !document.getElementById('ai-results-page').classList.contains('hidden');
       }
     }
     this.currentTabId = tabId;
@@ -286,7 +287,13 @@ const BrowserApp = {
     this.positionPlusButton(tab);
     if (tab.viewReady && tab.webview) {
       tab.webview.classList.remove('hidden');
-      this.showWebview();
+      if (tab.showingAI) {
+        this.showAIResults();
+      } else {
+        this.showWebview();
+      }
+    } else if (tab.showingAI) {
+      this.showAIResults();
     } else {
       this.showEmptyState();
       this.hideAIResults();
@@ -357,8 +364,18 @@ const BrowserApp = {
     const input = document.getElementById('empty-search-input');
     if (input) { input.value = ''; input.focus(); }
   },
-  showAIResults() { document.getElementById('ai-results-page').classList.remove('hidden'); document.getElementById('empty-state').style.display = 'none'; },
-  hideAIResults() { document.getElementById('ai-results-page').classList.add('hidden'); }
+  showAIResults() {
+    document.getElementById('ai-results-page').classList.remove('hidden');
+    document.getElementById('empty-state').style.display = 'none';
+    document.getElementById('webview-container').style.display = 'none';
+    const tab = this.getCurrentTab();
+    if (tab) tab.showingAI = true;
+  },
+  hideAIResults() {
+    document.getElementById('ai-results-page').classList.add('hidden');
+    const tab = this.getCurrentTab();
+    if (tab) tab.showingAI = false;
+  }
 };
 
 document.addEventListener('DOMContentLoaded', () => BrowserApp.init());
