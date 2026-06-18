@@ -322,13 +322,15 @@ body {
 
 .ai-answer-card .answer-content table {
   border-collapse: collapse;
-  margin: 6px 0;
+  margin: 10px 0;
   width: 100%;
+  font-size: 14px;
 }
 .ai-answer-card .answer-content th, .ai-answer-card .answer-content td {
   border: 1px solid var(--border-color);
   padding: 8px 12px;
   text-align: left;
+  font-size: 14px;
 }
 .ai-answer-card .answer-content th { background: var(--bg-secondary); font-weight: 600; }
 

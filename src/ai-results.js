@@ -162,6 +162,29 @@ const AIResultsPage = {
     html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
     html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const lines = html.split('\n');
+    let tableHtml = '';
+    let inTable = false;
+    let tableLines = [];
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('|') && line.endsWith('|')) {
+        if (!inTable) { inTable = true; tableLines = []; }
+        tableLines.push(line);
+      } else {
+        if (inTable) {
+          tableHtml += this.buildTable(tableLines);
+          inTable = false;
+          tableLines = [];
+        }
+      }
+    }
+    if (inTable) tableHtml += this.buildTable(tableLines);
+    if (tableHtml) {
+      html = tableHtml;
+    } else {
+      html = lines.join('\n');
+    }
     html = html.replace(/^(.+)$/gm, (m) => {
       if (m.startsWith('<')) return m;
       if (m.trim() === '') return '';
@@ -172,6 +195,28 @@ const AIResultsPage = {
     });
     html = html.replace(/\n\s*\n/g, '\n');
     return html;
+  },
+
+  buildTable(rows) {
+    if (rows.length < 2) return rows.map(r => `<p>${r}</p>`).join('\n');
+    const parseRow = (r) => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+    const header = parseRow(rows[0]);
+    let bodyRows = [];
+    for (let i = 1; i < rows.length; i++) {
+      const cells = parseRow(rows[i]);
+      if (cells.every(c => /^[-:]+$/.test(c))) continue;
+      bodyRows.push(cells);
+    }
+    let t = '<table><thead><tr>';
+    header.forEach(h => { t += `<th>${h}</th>`; });
+    t += '</tr></thead><tbody>';
+    bodyRows.forEach(row => {
+      t += '<tr>';
+      row.forEach(c => { t += `<td>${c}</td>`; });
+      t += '</tr>';
+    });
+    t += '</tbody></table>';
+    return t;
   },
 
   escapeHtml(text) {
