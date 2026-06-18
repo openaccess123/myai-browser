@@ -305,8 +305,9 @@ const BrowserApp = {
   positionPlusButton() {
     const plusBtn = document.getElementById('new-tab-btn');
     const tabBar = document.getElementById('tab-bar');
-    if (tabBar && plusBtn) {
-      tabBar.appendChild(plusBtn);
+    const activeTab = tabBar.querySelector('.tab.active');
+    if (activeTab && activeTab.nextSibling !== plusBtn) {
+      tabBar.insertBefore(plusBtn, activeTab.nextSibling);
     }
   },
 
