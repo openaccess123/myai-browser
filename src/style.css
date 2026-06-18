@@ -290,6 +290,13 @@ body {
 .ai-answer-card .answer-content h2 { font-size: 17px; }
 .ai-answer-card .answer-content h3 { font-size: 15px; }
 
+.ai-answer-card .answer-content hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2px 0 6px;
+  padding: 0;
+}
+
 .ai-answer-card .answer-content p { margin: 8px 0; }
 .ai-answer-card .answer-content ul, .ai-answer-card .answer-content ol { margin: 8px 0; padding-left: 24px; }
 .ai-answer-card .answer-content li { margin: 4px 0; }
