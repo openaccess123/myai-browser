@@ -282,7 +282,7 @@ body {
 }
 
 .ai-answer-card .answer-content h1, .ai-answer-card .answer-content h2, .ai-answer-card .answer-content h3 {
-  margin: 0 0 4px;
+  margin: 0;
   padding: 0;
   line-height: 1.3;
 }
