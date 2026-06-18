@@ -156,7 +156,7 @@ const AIResultsPage = {
     html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
     html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
     html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-    html = html.replace(/^[-=*]{3,}$/gm, '<hr>');
+    html = html.replace(/^[-=*]{3,}$/gm, '');
     html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
     html = html.replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
     html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
