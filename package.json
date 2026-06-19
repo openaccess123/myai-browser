@@ -1,7 +1,7 @@
 {
   "name": "myai-browser",
-  "version": "1.0.0",
-  "description": "AI Browser powered by DeepSeek",
+  "version": "1.1.0",
+  "description": "AI Browser powered by Groq Llama 4",
   "main": "main.js",
   "author": "NF360",
   "scripts": {
