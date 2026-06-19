@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, session } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { autoUpdater } = require('electron-updater');
+const Tracker = require('./src/tracker');
 
 let mainWindow;
 const userDataPath = app.getPath('userData');
@@ -43,6 +44,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+  Tracker.trackLaunch();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
