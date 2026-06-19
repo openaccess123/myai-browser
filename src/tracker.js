@@ -40,7 +40,13 @@ const Tracker = {
   },
 
   sendEvent(eventType, extra = {}) {
-    const dbURL = typeof TRACKING_CONFIG !== 'undefined' ? TRACKING_CONFIG.databaseURL : '';
+    let dbURL = '';
+    try {
+      const configPath = path.join(app.getAppPath(), 'config.js');
+      const configText = fs.readFileSync(configPath, 'utf8');
+      const match = configText.match(/databaseURL:\s*['"](.+?)['"]/);
+      if (match) dbURL = match[1];
+    } catch (e) {}
     if (!dbURL || dbURL.includes('your-project-id')) return;
 
     const data = this.loadData();
